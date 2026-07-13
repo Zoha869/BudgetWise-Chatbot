@@ -1,0 +1,257 @@
+.sidebar{
+
+width:280px;
+
+height:100vh;
+
+background:#081321;
+
+border-right:1px solid rgba(255,255,255,.08);
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.sidebar-top{
+
+padding:25px;
+
+}
+
+.new-chat-btn{
+
+width:100%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:10px;
+
+background:#10b981;
+
+color:white;
+
+border:none;
+
+padding:15px;
+
+border-radius:14px;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.new-chat-btn:hover{
+
+background:#059669;
+
+}
+
+.history-section{
+
+padding:20px;
+
+overflow-y:auto;
+
+flex:1;
+
+}
+
+.history-section h4{
+
+color:#94a3b8;
+
+margin-bottom:15px;
+
+font-size:14px;
+
+text-transform:uppercase;
+
+letter-spacing:1px;
+
+}
+
+.history-list{
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+.history-item{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+padding:14px;
+
+border:none;
+
+background:#10213a;
+
+color:white;
+
+border-radius:12px;
+
+cursor:pointer;
+
+transition:.25s;
+
+text-align:left;
+
+}
+
+.history-item:hover{
+
+background:#18304d;
+
+}
+
+.history-item.active{
+
+background:#10b981;
+
+}
+
+.history-item span{
+
+overflow:hidden;
+
+white-space:nowrap;
+
+text-overflow:ellipsis;
+
+}
+
+.empty-history{
+
+color:#64748b;
+
+font-size:14px;
+
+margin-top:15px;
+
+}
+.history-container{
+
+    margin-top:25px;
+
+}
+
+.history-container h3{
+
+    color:#888;
+    font-size:13px;
+    margin-bottom:15px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+
+}
+
+.history-empty{
+
+    color:#888;
+    font-size:14px;
+
+}
+
+.history-item{
+
+    width:100%;
+    text-align:left;
+
+    background:transparent;
+
+    border:none;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    margin-bottom:10px;
+
+    transition:.25s;
+
+}
+
+.history-item:hover{
+
+    background:#f3f4f6;
+
+}
+
+.history-item.active{
+
+    background:#0F766E;
+
+    color:white;
+
+}
+
+.history-title{
+
+    font-size:15px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+.sidebar-bottom {
+  margin-top: auto;
+  padding: 20px;
+}
+
+.user-email {
+  font-size: 13px;
+  margin-bottom: 12px;
+  word-break: break-word;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #ef4444;
+  color: white;
+  font-size: 15px;
+}
+
+.logout-btn:hover {
+  opacity: 0.85;
+}
+
+.history-date{
+
+    margin-top:6px;
+
+    font-size:12px;
+
+    opacity:.7;
+
+}
