@@ -28,3 +28,10 @@ build/
 # OS
 .DS_Store
 Thumbs.db
+# extra .env variants (agar future mein banayen)
+.env.local
+.env.*.local
+
+# Python packaging/test junk (agar future mein aaye)
+*.egg-info/
+.pytest_cache/

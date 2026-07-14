@@ -65,3 +65,31 @@ export async function sendMessage(
     sessionId: newSessionId,
   };
 }
+export async function getConversations(accessToken) {
+
+    const response = await fetch(
+        "http://127.0.0.1:8000/sessions",
+        {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }
+    );
+
+    return await response.json();
+
+}
+export async function getMessages(sessionId, accessToken) {
+
+    const response = await fetch(
+        `http://127.0.0.1:8000/sessions/${sessionId}/messages`,
+        {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }
+    );
+
+    return await response.json();
+
+}

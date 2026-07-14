@@ -435,3 +435,4 @@ max-width:380px;
 }
 
 }
+.hero-card { background: var(--card-bg); color: var(--text-primary); }

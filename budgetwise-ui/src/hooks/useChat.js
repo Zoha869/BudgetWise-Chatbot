@@ -1,5 +1,10 @@
-import { useState } from "react";
-import { sendMessage } from "../services/api";
+import { useEffect, useState } from "react";
+import { supabase } from "../services/supabase";
+import {
+    sendMessage,
+    getConversations,
+    getMessages
+} from "../services/api";
 
 export default function useChat(accessToken) {
 
@@ -13,21 +18,45 @@ export default function useChat(accessToken) {
     const [conversations, setConversations] = useState([]);
     const [activeId, setActiveId] = useState(null);
 
-    async function send(text){
+    useEffect(() => {
 
-        if(!text.trim()) return;
+        if (!accessToken) return;
 
-        if(!accessToken){
+        loadConversations();
+
+    }, [accessToken]);
+
+    async function loadConversations() {
+
+        const data = await getConversations(accessToken);
+
+        setConversations(
+
+            data.map(chat => ({
+                id: chat.id,
+                title: chat.title || "New Chat",
+                date: new Date(chat.created_at).toLocaleDateString()
+            }))
+
+        );
+
+    }
+
+    async function send(text) {
+
+        if (!text.trim()) return;
+
+        if (!accessToken) {
             alert("Please login first");
             return;
         }
 
-        let currentSession=sessionId;
+        let currentSession = sessionId;
 
         // First message -> create new conversation
-        if(!currentSession){
+        if (!currentSession) {
 
-            currentSession=crypto.randomUUID();
+            currentSession = crypto.randomUUID();
 
             setSessionId(currentSession);
 
@@ -38,75 +67,66 @@ export default function useChat(accessToken) {
                 currentSession
             );
 
-            setConversations(prev=>[
-                {
-                    id:currentSession,
-                    title:text.substring(0,30)+"...",
-                    date:new Date().toLocaleDateString()
-                },
-                ...prev
-            ]);
-
         }
 
-        setMessages(prev=>[
+        setMessages(prev => [
             ...prev,
             {
-                role:"user",
-                text
-            }
+                role: "user",
+                text,
+            },
+            {
+                role: "assistant",
+                text: "",
+            },
         ]);
 
         setLoading(true);
 
-        setMessages(prev=>[
-            ...prev,
-            {
-                role:"assistant",
-                text:""
-            }
-        ]);
+        try {
 
-        try{
-
-            const result=await sendMessage(
+            const result = await sendMessage(
 
                 text,
                 currentSession,
                 accessToken,
 
-                (chunk)=>{
+                (chunk) => {
 
-                    setMessages(prev=>{
-
-                        const copy=[...prev];
-
-                        copy[copy.length-1].text+=chunk;
-
-                        return copy;
-
+                    setMessages(prev => {
+                        return prev.map((msg, index) => {
+                            if (index === prev.length - 1) {
+                                return {
+                                    ...msg,
+                                    text: msg.text + chunk,
+                                };
+                            }
+                            return msg;
+                        });
                     });
 
                 }
 
             );
 
-            if(result.sessionId){
+            const effectiveSessionId = result.sessionId || currentSession;
 
-                setSessionId(result.sessionId);
+            setSessionId(effectiveSessionId);
 
-                setActiveId(result.sessionId);
+            setActiveId(effectiveSessionId);
 
-                localStorage.setItem(
-                    "budgetwise_session_id",
-                    result.sessionId
-                );
+            localStorage.setItem(
+                "budgetwise_session_id",
+                effectiveSessionId
+            );
 
-            }
+            // Always refresh the sidebar — the backend may generate/update
+            // the title even on an existing session, not just brand-new ones.
+            await loadConversations();
 
         }
 
-        finally{
+        finally {
 
             setLoading(false);
 
@@ -114,7 +134,34 @@ export default function useChat(accessToken) {
 
     }
 
-    function newChat(){
+    async function selectConversation(id) {
+
+        const data = await getMessages(
+            id,
+            accessToken
+        );
+
+        setMessages(
+
+            data.map(msg => ({
+                role: msg.role,
+                text: msg.content
+            }))
+
+        );
+
+        setSessionId(id);
+
+        setActiveId(id);
+
+        localStorage.setItem(
+            "budgetwise_session_id",
+            id
+        );
+
+    }
+
+    function newChat() {
 
         setMessages([]);
 
@@ -128,16 +175,13 @@ export default function useChat(accessToken) {
 
     }
 
-    return{
-
+    return {
         messages,
         loading,
         send,
         newChat,
-
+        selectConversation,
         conversations,
         activeId
-
     };
-
 }

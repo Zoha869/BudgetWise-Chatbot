@@ -53,3 +53,4 @@ border-bottom-left-radius:8px;
 box-shadow:0 4px 12px rgba(0,0,0,.08);
 
 }
+.hero-card { background: var(--card-bg); color: var(--text-primary); }

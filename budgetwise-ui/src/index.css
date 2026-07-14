@@ -1,3 +1,34 @@
+:root {
+  --bg-app: #f5f7fa;
+  --bg-navbar: #ffffff;
+  --bg-btn: #e5e9f0;
+  --bg-btn-hover: #d8dee9;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b7280;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --accent: #10b981;
+  --logout-bg: #ef4444;
+  --logout-hover: #dc2626;
+}
+
+[data-theme="dark"] {
+  --bg-app: #0b0f17;
+  --bg-navbar: #07111f;
+  --bg-btn: #13263f;
+  --bg-btn-hover: #1c3557;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --accent: #10b981;
+  --logout-bg: #ef4444;
+  --logout-hover: #dc2626;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
 *{
 
 margin:0;

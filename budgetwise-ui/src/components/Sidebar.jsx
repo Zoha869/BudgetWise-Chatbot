@@ -30,6 +30,7 @@ export default function Sidebar({
       <div className="history-section">
 
         <h4>Recent Chats</h4>
+        
 
         <div className="history-list">
 

@@ -255,3 +255,4 @@ margin-top:15px;
     opacity:.7;
 
 }
+.hero-card { background: var(--card-bg); color: var(--text-primary); }

@@ -30,16 +30,15 @@ function Dashboard() {
   }, []);
 
 
-  const {
+const {
     messages,
     loading,
     send,
     newChat,
     conversations,
-    activeId
-
-  } = useChat(token);
-
+    activeId,
+    selectConversation
+} = useChat(token);
 
   async function logout() {
 
@@ -53,22 +52,14 @@ function Dashboard() {
   return (
 
     <div className="dashboard">
-
-      <Sidebar
-
-        user={user}
-
-        conversations={conversations}
-
-        activeId={activeId}
-
-        onNewChat={newChat}
-
-        onSelectConversation={() => {}}
-
-        onLogout={logout}
-
-      />
+<Sidebar
+  user={user}
+  conversations={conversations}
+  activeId={activeId}
+  onNewChat={newChat}
+  onSelectConversation={selectConversation}
+  onLogout={logout}
+/>
 
 
       <div className="dashboard-content">

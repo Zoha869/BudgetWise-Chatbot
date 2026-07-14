@@ -183,3 +183,4 @@ padding:20px;
 }
 
 }
+.hero-card { background: var(--card-bg); color: var(--text-primary); }
