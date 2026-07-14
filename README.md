@@ -14,9 +14,7 @@ BudgetWise AI is an AI-powered finance assistant that helps users with budgeting
 ## Technologies Used
 
 ### Frontend
-- HTML
-- CSS
-- JavaScript
+Vite-React
 
 ### Backend
 - Python
