@@ -51,18 +51,18 @@ supabase = create_client(
 app = FastAPI()
 
 
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://budget-wise-chatbot-6fdy.vercel.app/",
-        "https://budget-wise-chatbot-6fdy.vercel.app"
+        "https://budget-wise-chatbot-6fdy.vercel.app",
+        "https://budget-wise-chatbot-y6qi.vercel.app",  # naya URL add karo
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["X-Session-Id"],
 )
-
 
 session_memory: Dict[str, List[Dict[str, str]]] = {}
 
