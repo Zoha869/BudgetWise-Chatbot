@@ -57,8 +57,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://budget-wise-chatbot-6fdy.vercel.app",
-        "https://budget-wise-chatbot-y6qi.vercel.app",  # naya URL add karo
-    ],
+        "https://budget-wise-chatbot-ly7k.vercel.app/",  
+    ],app
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
